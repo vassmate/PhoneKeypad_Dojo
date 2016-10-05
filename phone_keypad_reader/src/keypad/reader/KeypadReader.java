@@ -16,25 +16,23 @@ public class KeypadReader {
 		if (input == null || input.equals("")) {
 			return result;
 		}
-
-		String[] inputArray = input.split("");
 		String currentKey = "";
 		int currentKeyCount = 0;
 
-		for (int i = 0; i < inputArray.length; i++) {
-			currentKey = inputArray[i];
+		for (int i = 0; i < input.length(); i++) {
+			currentKey = String.valueOf(input.charAt(i));
 
 			if (keypad.containsKey(currentKey)) {
 				currentKeyCount++;
 			}
 
-			if (i + 1 > inputArray.length - 1) {
+			if (i + 1 > input.length() - 1) {
 				currentKeyCount--;
 				result += getKeypadValue(currentKey, currentKeyCount);
 				break;
 			}
 
-			if (!inputArray[i + 1].equals(currentKey)) {
+			if (!String.valueOf(input.charAt(i + 1)).equals(currentKey)) {
 				currentKeyCount--;
 				result += getKeypadValue(currentKey, currentKeyCount);
 				currentKey = "";
