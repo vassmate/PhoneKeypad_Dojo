@@ -12,31 +12,30 @@ public class KeypadReader {
 
 	public String reader(String input) {
 		String result = "";
+		String currentKey = "";
+		int currentKeyCount = 0;
 
 		if (input == null || input.equals("")) {
 			return result;
 		}
-		String currentKey = "";
-		int currentKeyCount = 0;
 
 		for (int i = 0; i < input.length(); i++) {
 			currentKey = String.valueOf(input.charAt(i));
 
 			if (keypad.containsKey(currentKey)) {
 				currentKeyCount++;
-			}
 
-			if (i + 1 > input.length() - 1) {
-				currentKeyCount--;
-				result += getKeypadValue(currentKey, currentKeyCount);
-				break;
-			}
-
-			if (!String.valueOf(input.charAt(i + 1)).equals(currentKey)) {
-				currentKeyCount--;
-				result += getKeypadValue(currentKey, currentKeyCount);
-				currentKey = "";
-				currentKeyCount = 0;
+				if (i + 1 > input.length() - 1) {
+					currentKeyCount--;
+					result += getKeypadValue(currentKey, currentKeyCount);
+					break;
+				}
+				if (!String.valueOf(input.charAt(i + 1)).equals(currentKey)) {
+					currentKeyCount--;
+					result += getKeypadValue(currentKey, currentKeyCount);
+					currentKey = "";
+					currentKeyCount = 0;
+				}
 			}
 		}
 		return result;
